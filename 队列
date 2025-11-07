@@ -1,0 +1,27 @@
+# 使用 collections.deque
+from collections import deque
+dq = deque()
+dq.append(1)  # 队尾添加元素 → deque([1](@ref)
+dq.append(2)  # deque([1, 2])
+print("当前队列:", dq)  # 输出: deque([1, 2])[3](@ref)[4](@ref)
+
+# 使用 queue.Queue（线程安全）
+from queue import Queue
+q = Queue()
+q.put("task1")  # 入队
+print("队列大小:", q.qsize())  # 输出: 1[2](@ref)[5](@ref)
+
+# 单链表实现
+class LinkedListQueue:
+    def __init__(self):
+        self.head = self.tail = None
+    def enqueue(self, data):
+        new_node = Node(data)
+        if self.tail is None:  # 队列为空
+            self.head = self.tail = new_node
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
+queue = LinkedListQueue()
+queue.enqueue("A")
+print("入队后队列头:", queue.head.data)  # 输出: A[1](@ref)
